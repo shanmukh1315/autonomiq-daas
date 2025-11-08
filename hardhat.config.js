@@ -1,32 +1,42 @@
 // hardhat.config.js
-require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
+require("@nomicfoundation/hardhat-toolbox");
 
-const {
-  ARC_RPC,            // e.g. https://rpc.testnet.arc.network
-  PRIVATE_KEY,        // 0x... deployer key (only needed for deploy, NOT for compile)
-} = process.env;
+/**
+ * Env you may set locally or in GitHub → Settings → Secrets and variables → Actions
+ *
+ * ARC_RPC        = https://rpc.testnet.arc.network
+ * PRIVATE_KEY    = 0x...  (the deployer wallet PK; NEVER commit this)
+ * ARC_CHAIN_ID   = 5042002 (optional; defaults below)
+ */
 
-// Build networks conditionally so compile doesn't fail in CI
+const ARC_RPC     = process.env.ARC_RPC;
+const PRIVATE_KEY = process.env.PRIVATE_KEY?.trim();
+const ARC_CHAIN_ID = Number(process.env.ARC_CHAIN_ID || 5042002);
+
+// Always keep local Hardhat network available
 const networks = {
-  hardhat: {},                                  // always available
-  ...(ARC_RPC && PRIVATE_KEY
-    ? {
-        arcTestnet: {
-          url: ARC_RPC,
-          chainId: 5042002,
-          accounts: [
-            PRIVATE_KEY.startsWith("0x") ? PRIVATE_KEY : `0x${PRIVATE_KEY}`,
-          ],
-        },
-      }
-    : {}),                                      // omit arcTestnet if envs missing
+  hardhat: {
+    // tweak if you want forking or chainId here
+  },
 };
+
+// Add Arc Testnet ONLY if we actually have a URL
+if (ARC_RPC) {
+  networks.arcTestnet = {
+    url: ARC_RPC,                 // must be a valid string or HH8 will fire
+    chainId: ARC_CHAIN_ID,
+    accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [], // empty = read-only ops in scripts
+  };
+}
 
 module.exports = {
   solidity: {
     version: "0.8.24",
-    settings: { optimizer: { enabled: true, runs: 200 } },
+    settings: {
+      optimizer: { enabled: true, runs: 200 },
+    },
   },
   networks,
+  mocha: { timeout: 120000 },
 };
