@@ -1,0 +1,36 @@
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vscode/
+.DS_Store
+
+# Hardhat / Foundry / Artifacts
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+web/.env
+web/.env.*
+!web/.env.example
+
+# Vite / build
+web/dist/
+web/.vite/
+web/node_modules/
+
+# Python venv
+.venv/
+__pycache__/
+*.pyc
+
+# Misc
+coverage/
+*.coverage
+*.log

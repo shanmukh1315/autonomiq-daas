@@ -1,0 +1,19 @@
+{
+  "name": "autonomiq-daas-arc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network arcTestnet",
+    "fund": "hardhat run scripts/fund.js --network arcTestnet",
+    "release": "hardhat run scripts/release.js --network arcTestnet",
+    "refund": "hardhat run scripts/refund.js --network arcTestnet",
+    "verify": "echo 'Use block explorer verification if available'"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.6.1",
+    "ethers": "^6.13.2",
+    "hardhat": "^2.22.11"
+  }
+}

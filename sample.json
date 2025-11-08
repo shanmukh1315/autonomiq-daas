@@ -1,0 +1,24 @@
+{
+  "task": "Autonomiq escrow demo",
+  "description": "Approve 1 USDC to the escrow and deposit it. Release on arbiter signal.",
+  "network": {
+    "rpc": "https://rpc.testnet.arc.network",
+    "chainId": 5042002
+  },
+  "contracts": {
+    "escrowAddress": "0xD405c7A32ffb875b7772D5164501BC2eEeD6D89c",
+    "usdcAddress": "0x3600000000000000000000000000000000000000"
+  },
+  "participants": {
+    "client": "0x2607a61b229f12a084a5927c012eEb27C117c8CD",
+    "provider": "0x2607a61b229f12a084a5927c012eEb27C117c8CD",
+    "arbiter": "0x2607a61b229f12a084a5927c012eEb27C117c8CD"
+  },
+  "amountUSDC": 1000000,
+  "decimals": 6,
+  "actions": [
+    { "type": "approve", "token": "USDC", "spender": "escrow", "amount": 1000000 },
+    { "type": "deposit", "to": "escrow", "amount": 1000000 },
+    { "type": "status" }
+  ]
+}

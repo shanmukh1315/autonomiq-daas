@@ -1,0 +1,8 @@
+{
+  "network": "arcTestnet",
+  "chainId": 5042002,
+  "contracts": {
+    "AutonomiqEscrow": "0xD405c7A32ffb875b7772D5164501BC2eEeD6D89c"
+  },
+  "updatedAt": "2025-11-08T00:00:00Z"
+}
